@@ -1,0 +1,1235 @@
+<!DOCTYPE html>
+<html lang="en" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Nova Solutions | Future-Ready Software</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/ScrollTrigger.min.js"></script>
+    <script src="https://unpkg.com/lucide@latest"></script>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&family=Inter:wght@300;400;500;600&display=swap');
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Inter', sans-serif;
+            background: #0a0a0f;
+            color: #ffffff;
+            overflow-x: hidden;
+        }
+
+        h1, h2, h3, h4, h5, h6 {
+            font-family: 'Space Grotesk', sans-serif;
+        }
+
+        /* Aurora Background Effect */
+        .aurora-bg {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: -1;
+            background: 
+                radial-gradient(ellipse at 20% 20%, rgba(120, 119, 198, 0.3) 0%, transparent 50%),
+                radial-gradient(ellipse at 80% 80%, rgba(255, 119, 198, 0.15) 0%, transparent 50%),
+                radial-gradient(ellipse at 40% 60%, rgba(99, 102, 241, 0.2) 0%, transparent 40%),
+                #0a0a0f;
+            animation: auroraMove 20s ease-in-out infinite;
+        }
+
+        @keyframes auroraMove {
+            0%, 100% { transform: translate(0, 0) scale(1); }
+            33% { transform: translate(30px, -30px) scale(1.1); }
+            66% { transform: translate(-20px, 20px) scale(0.9); }
+        }
+
+        /* Floating Orbs */
+        .orb {
+            position: absolute;
+            border-radius: 50%;
+            filter: blur(80px);
+            opacity: 0.4;
+            animation: float 10s ease-in-out infinite;
+        }
+
+        .orb-1 {
+            width: 400px;
+            height: 400px;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            top: 10%;
+            left: -10%;
+            animation-delay: 0s;
+        }
+
+        .orb-2 {
+            width: 300px;
+            height: 300px;
+            background: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);
+            top: 60%;
+            right: -5%;
+            animation-delay: -5s;
+        }
+
+        @keyframes float {
+            0%, 100% { transform: translate(0, 0) scale(1); }
+            50% { transform: translate(0, -30px) scale(1.1); }
+        }
+
+        /* Glassmorphism */
+        .glass {
+            background: rgba(255, 255, 255, 0.03);
+            backdrop-filter: blur(20px);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        .glass-card {
+            background: linear-gradient(135deg, rgba(255,255,255,0.05) 0%, rgba(255,255,255,0.01) 100%);
+            backdrop-filter: blur(20px);
+            border: 1px solid rgba(255,255,255,0.1);
+            box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.37);
+        }
+
+        /* Text Gradient */
+        .text-gradient {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 50%, #f093fb 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        /* Magnetic Button Effect */
+        .magnetic-btn {
+            position: relative;
+            transition: transform 0.3s cubic-bezier(0.23, 1, 0.32, 1);
+        }
+
+        .magnetic-btn::before {
+            content: '';
+            position: absolute;
+            inset: 0;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            border-radius: inherit;
+            opacity: 0;
+            transition: opacity 0.3s;
+            z-index: -1;
+        }
+
+        .magnetic-btn:hover::before {
+            opacity: 1;
+        }
+
+        /* Grid Pattern */
+        .grid-pattern {
+            background-image: 
+                linear-gradient(rgba(255,255,255,0.03) 1px, transparent 1px),
+                linear-gradient(90deg, rgba(255,255,255,0.03) 1px, transparent 1px);
+            background-size: 50px 50px;
+        }
+
+        /* Scroll Reveal */
+        .reveal {
+            opacity: 0;
+            transform: translateY(30px);
+        }
+
+        /* Custom Scrollbar */
+        ::-webkit-scrollbar {
+            width: 8px;
+        }
+        ::-webkit-scrollbar-track {
+            background: #0a0a0f;
+        }
+        ::-webkit-scrollbar-thumb {
+            background: linear-gradient(180deg, #667eea 0%, #764ba2 100%);
+            border-radius: 4px;
+        }
+
+        /* Navigation Blur */
+        .nav-blur {
+            background: rgba(10, 10, 15, 0.8);
+            backdrop-filter: blur(20px);
+            border-bottom: 1px solid rgba(255,255,255,0.05);
+        }
+
+        /* Card Hover Effect */
+        .hover-lift {
+            transition: all 0.4s cubic-bezier(0.23, 1, 0.32, 1);
+        }
+        .hover-lift:hover {
+            transform: translateY(-10px) scale(1.02);
+            box-shadow: 0 20px 40px rgba(102, 126, 234, 0.2);
+        }
+
+        /* Animated Border */
+        .animated-border {
+            position: relative;
+            overflow: hidden;
+        }
+        .animated-border::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 2px;
+            background: linear-gradient(90deg, transparent, #667eea, transparent);
+            animation: borderSlide 3s linear infinite;
+        }
+        @keyframes borderSlide {
+            0% { left: -100%; }
+            100% { left: 100%; }
+        }
+
+        /* Typing Effect Cursor */
+        .cursor-blink {
+            animation: blink 1s step-end infinite;
+        }
+        @keyframes blink {
+            50% { opacity: 0; }
+        }
+
+        /* Particle Canvas */
+        #particles {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            z-index: 1;
+        }
+
+        /* Service Card Icon Animation */
+        .service-icon {
+            transition: transform 0.5s cubic-bezier(0.23, 1, 0.32, 1);
+        }
+        .service-card:hover .service-icon {
+            transform: rotate(360deg) scale(1.2);
+        }
+
+        /* Stats Counter Animation */
+        .stat-number {
+            font-variant-numeric: tabular-nums;
+        }
+
+        /* Image Mask */
+        .image-mask {
+            mask-image: linear-gradient(to bottom, black 50%, transparent 100%);
+            -webkit-mask-image: linear-gradient(to bottom, black 50%, transparent 100%);
+        }
+    </style>
+</head>
+<body class="antialiased">
+
+    <!-- Background Effects -->
+    <div class="aurora-bg"></div>
+    <div class="orb orb-1"></div>
+    <div class="orb orb-2"></div>
+
+    <!-- Navigation -->
+    <nav id="navbar" class="fixed w-full z-50 transition-all duration-500 py-4">
+        <div class="max-w-7xl mx-auto px-6 lg:px-8">
+            <div class="flex items-center justify-between">
+                <div class="flex items-center gap-2 group cursor-pointer">
+                    <div class="w-10 h-10 rounded-xl bg-gradient-to-br from-indigo-500 to-purple-600 flex items-center justify-center transform group-hover:rotate-12 transition-transform duration-300">
+                        <i data-lucide="zap" class="w-6 h-6 text-white"></i>
+                    </div>
+                    <span class="text-2xl font-bold tracking-tight">Nova<span class="text-gradient">Solutions</span></span>
+                </div>
+                
+                <div class="hidden md:flex items-center gap-8">
+                    <a href="#services" class="text-sm font-medium text-gray-300 hover:text-white transition-colors relative group">
+                        Services
+                        <span class="absolute -bottom-1 left-0 w-0 h-0.5 bg-gradient-to-r from-indigo-500 to-purple-500 group-hover:w-full transition-all duration-300"></span>
+                    </a>
+                    <a href="#about" class="text-sm font-medium text-gray-300 hover:text-white transition-colors relative group">
+                        About
+                        <span class="absolute -bottom-1 left-0 w-0 h-0.5 bg-gradient-to-r from-indigo-500 to-purple-500 group-hover:w-full transition-all duration-300"></span>
+                    </a>
+                    <a href="#work" class="text-sm font-medium text-gray-300 hover:text-white transition-colors relative group">
+                        Work
+                        <span class="absolute -bottom-1 left-0 w-0 h-0.5 bg-gradient-to-r from-indigo-500 to-purple-500 group-hover:w-full transition-all duration-300"></span>
+                    </a>
+                    <a href="#contact" class="magnetic-btn px-6 py-2.5 rounded-full bg-white/10 border border-white/20 text-sm font-semibold hover:bg-white/20 transition-all">
+                        Get Started
+                    </a>
+                </div>
+
+                <button id="mobile-menu-btn" class="md:hidden text-white">
+                    <i data-lucide="menu" class="w-6 h-6"></i>
+                </button>
+            </div>
+        </div>
+
+        <!-- Mobile Menu -->
+        <div id="mobile-menu" class="hidden md:hidden absolute top-full left-0 w-full glass border-t border-white/10">
+            <div class="px-6 py-4 space-y-4">
+                <a href="#services" class="block text-gray-300 hover:text-white">Services</a>
+                <a href="#about" class="block text-gray-300 hover:text-white">About</a>
+                <a href="#work" class="block text-gray-300 hover:text-white">Work</a>
+                <a href="#contact" class="block text-indigo-400 font-semibold">Get Started</a>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section class="relative min-h-screen flex items-center justify-center overflow-hidden pt-20">
+        <canvas id="particles"></canvas>
+        
+        <div class="relative z-10 max-w-7xl mx-auto px-6 lg:px-8 text-center">
+            <div class="inline-flex items-center gap-2 px-4 py-2 rounded-full glass mb-8 reveal">
+                <span class="w-2 h-2 rounded-full bg-green-400 animate-pulse"></span>
+                <span class="text-sm font-medium text-gray-300">Available for new projects</span>
+            </div>
+
+            <h1 class="text-5xl md:text-7xl lg:text-8xl font-bold leading-tight mb-6 reveal">
+                We Build <br>
+                <span class="text-gradient" id="typewriter">Digital Reality</span><span class="cursor-blink text-indigo-400">|</span>
+            </h1>
+
+            <p class="text-xl md:text-2xl text-gray-400 max-w-3xl mx-auto mb-12 reveal">
+                Transforming visionary ideas into cutting-edge software solutions. 
+                We craft immersive digital experiences that define the future.
+            </p>
+
+            <div class="flex flex-col sm:flex-row gap-4 justify-center items-center reveal">
+                <button class="magnetic-btn group px-8 py-4 rounded-full bg-gradient-to-r from-indigo-600 to-purple-600 text-white font-semibold text-lg hover:shadow-2xl hover:shadow-indigo-500/25 transition-all flex items-center gap-2">
+                    Start Your Project
+                    <i data-lucide="arrow-right" class="w-5 h-5 group-hover:translate-x-1 transition-transform"></i>
+                </button>
+                <button class="magnetic-btn px-8 py-4 rounded-full glass text-white font-semibold text-lg hover:bg-white/10 transition-all flex items-center gap-2">
+                    <i data-lucide="play" class="w-5 h-5"></i>
+                    Watch Showreel
+                </button>
+            </div>
+
+            <!-- Stats -->
+            <div class="grid grid-cols-2 md:grid-cols-4 gap-8 mt-20 max-w-4xl mx-auto reveal">
+                <div class="text-center">
+                    <div class="text-4xl font-bold text-gradient stat-number" data-target="150">0</div>
+                    <div class="text-sm text-gray-400 mt-2">Projects Delivered</div>
+                </div>
+                <div class="text-center">
+                    <div class="text-4xl font-bold text-gradient stat-number" data-target="98">0</div>
+                    <div class="text-sm text-gray-400 mt-2">Client Satisfaction %</div>
+                </div>
+                <div class="text-center">
+                    <div class="text-4xl font-bold text-gradient stat-number" data-target="12">0</div>
+                    <div class="text-sm text-gray-400 mt-2">Years Experience</div>
+                </div>
+                <div class="text-center">
+                    <div class="text-4xl font-bold text-gradient stat-number" data-target="24">0</div>
+                    <div class="text-sm text-gray-400 mt-2">Countries Served</div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Scroll Indicator -->
+        <div class="absolute bottom-8 left-1/2 transform -translate-x-1/2 animate-bounce">
+            <i data-lucide="chevron-down" class="w-6 h-6 text-gray-400"></i>
+        </div>
+    </section>
+
+    <!-- Services Section -->
+    <section id="services" class="py-32 relative">
+        <div class="max-w-7xl mx-auto px-6 lg:px-8">
+            <div class="text-center mb-20 reveal">
+                <h2 class="text-4xl md:text-5xl font-bold mb-6">Our <span class="text-gradient">Expertise</span></h2>
+                <p class="text-xl text-gray-400 max-w-2xl mx-auto">
+                    Comprehensive software solutions tailored to elevate your business 
+                    in the digital landscape.
+                </p>
+            </div>
+
+            <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
+                <!-- Service Card 1 -->
+                <div class="service-card glass-card rounded-3xl p-8 hover-lift cursor-pointer group reveal">
+                    <div class="w-14 h-14 rounded-2xl bg-gradient-to-br from-blue-500 to-cyan-400 flex items-center justify-center mb-6 service-icon">
+                        <i data-lucide="smartphone" class="w-7 h-7 text-white"></i>
+                    </div>
+                    <h3 class="text-2xl font-bold mb-4 group-hover:text-indigo-400 transition-colors">Mobile Development</h3>
+                    <p class="text-gray-400 leading-relaxed mb-6">
+                        Native and cross-platform mobile applications built with React Native and Flutter. 
+                        Seamless performance on iOS and Android.
+                    </p>
+                    <div class="flex items-center text-indigo-400 font-semibold group-hover:gap-2 transition-all">
+                        Learn more <i data-lucide="arrow-right" class="w-4 h-4 ml-2"></i>
+                    </div>
+                </div>
+
+                <!-- Service Card 2 -->
+                <div class="service-card glass-card rounded-3xl p-8 hover-lift cursor-pointer group reveal">
+                    <div class="w-14 h-14 rounded-2xl bg-gradient-to-br from-purple-500 to-pink-500 flex items-center justify-center mb-6 service-icon">
+                        <i data-lucide="globe" class="w-7 h-7 text-white"></i>
+                    </div>
+                    <h3 class="text-2xl font-bold mb-4 group-hover:text-purple-400 transition-colors">Web Applications</h3>
+                    <p class="text-gray-400 leading-relaxed mb-6">
+                        Scalable, high-performance web apps using Next.js, Node.js, and cloud architecture. 
+                        Designed for millions of users.
+                    </p>
+                    <div class="flex items-center text-purple-400 font-semibold group-hover:gap-2 transition-all">
+                        Learn more <i data-lucide="arrow-right" class="w-4 h-4 ml-2"></i>
+                    </div>
+                </div>
+
+                <!-- Service Card 3 -->
+                <div class="service-card glass-card rounded-3xl p-8 hover-lift cursor-pointer group reveal">
+                    <div class="w-14 h-14 rounded-2xl bg-gradient-to-br from-orange-500 to-red-500 flex items-center justify-center mb-6 service-icon">
+                        <i data-lucide="brain" class="w-7 h-7 text-white"></i>
+                    </div>
+                    <h3 class="text-2xl font-bold mb-4 group-hover:text-orange-400 transition-colors">AI & Machine Learning</h3>
+                    <p class="text-gray-400 leading-relaxed mb-6">
+                        Intelligent systems powered by TensorFlow and PyTorch. 
+                        From predictive analytics to natural language processing.
+                    </p>
+                    <div class="flex items-center text-orange-400 font-semibold group-hover:gap-2 transition-all">
+                        Learn more <i data-lucide="arrow-right" class="w-4 h-4 ml-2"></i>
+                    </div>
+                </div>
+
+                <!-- Service Card 4 -->
+                <div class="service-card glass-card rounded-3xl p-8 hover-lift cursor-pointer group reveal">
+                    <div class="w-14 h-14 rounded-2xl bg-gradient-to-br from-green-500 to-emerald-400 flex items-center justify-center mb-6 service-icon">
+                        <i data-lucide="shield" class="w-7 h-7 text-white"></i>
+                    </div>
+                    <h3 class="text-2xl font-bold mb-4 group-hover:text-green-400 transition-colors">Cybersecurity</h3>
+                    <p class="text-gray-400 leading-relaxed mb-6">
+                        Enterprise-grade security audits, penetration testing, and compliance solutions. 
+                        Protecting your digital assets 24/7.
+                    </p>
+                    <div class="flex items-center text-green-400 font-semibold group-hover:gap-2 transition-all">
+                        Learn more <i data-lucide="arrow-right" class="w-4 h-4 ml-2"></i>
+                    </div>
+                </div>
+
+                <!-- Service Card 5 -->
+                <div class="service-card glass-card rounded-3xl p-8 hover-lift cursor-pointer group reveal">
+                    <div class="w-14 h-14 rounded-2xl bg-gradient-to-br from-indigo-500 to-blue-600 flex items-center justify-center mb-6 service-icon">
+                        <i data-lucide="cloud" class="w-7 h-7 text-white"></i>
+                    </div>
+                    <h3 class="text-2xl font-bold mb-4 group-hover:text-indigo-400 transition-colors">Cloud Architecture</h3>
+                    <p class="text-gray-400 leading-relaxed mb-6">
+                        AWS, Azure, and GCP infrastructure design. Serverless solutions, 
+                        microservices, and DevOps automation.
+                    </p>
+                    <div class="flex items-center text-indigo-400 font-semibold group-hover:gap-2 transition-all">
+                        Learn more <i data-lucide="arrow-right" class="w-4 h-4 ml-2"></i>
+                    </div>
+                </div>
+
+                <!-- Service Card 6 -->
+                <div class="service-card glass-card rounded-3xl p-8 hover-lift cursor-pointer group reveal">
+                    <div class="w-14 h-14 rounded-2xl bg-gradient-to-br from-pink-500 to-rose-500 flex items-center justify-center mb-6 service-icon">
+                        <i data-lucide="palette" class="w-7 h-7 text-white"></i>
+                    </div>
+                    <h3 class="text-2xl font-bold mb-4 group-hover:text-pink-400 transition-colors">UI/UX Design</h3>
+                    <p class="text-gray-400 leading-relaxed mb-6">
+                        Human-centered design with Figma and Adobe Creative Suite. 
+                        Creating intuitive interfaces that users love.
+                    </p>
+                    <div class="flex items-center text-pink-400 font-semibold group-hover:gap-2 transition-all">
+                        Learn more <i data-lucide="arrow-right" class="w-4 h-4 ml-2"></i>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- About Section -->
+    <section id="about" class="py-32 relative overflow-hidden">
+        <div class="absolute inset-0 grid-pattern opacity-30"></div>
+        
+        <div class="max-w-7xl mx-auto px-6 lg:px-8 relative z-10">
+            <div class="grid lg:grid-cols-2 gap-16 items-center">
+                <div class="reveal">
+                    <div class="inline-block px-4 py-2 rounded-full glass mb-6">
+                        <span class="text-sm font-semibold text-indigo-400">About Us</span>
+                    </div>
+                    <h2 class="text-4xl md:text-5xl font-bold mb-6 leading-tight">
+                        Engineering the <br>
+                        <span class="text-gradient">Future of Tech</span>
+                    </h2>
+                    <p class="text-lg text-gray-400 mb-6 leading-relaxed">
+                        Founded in 2012, Nova Solutions has evolved from a small startup to a global 
+                        technology partner. We combine technical excellence with creative innovation 
+                        to solve complex business challenges.
+                    </p>
+                    <p class="text-lg text-gray-400 mb-8 leading-relaxed">
+                        Our team of 200+ engineers, designers, and strategists work collaboratively 
+                        to deliver solutions that not only meet but exceed expectations. We believe 
+                        in long-term partnerships and measurable results.
+                    </p>
+                    
+                    <div class="flex gap-4">
+                        <div class="flex -space-x-4">
+                            <img src="https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=100&h=100&fit=crop" class="w-12 h-12 rounded-full border-2 border-gray-900" alt="Team member">
+                            <img src="https://images.unsplash.com/photo-1494790108377-be9c29b29330?w=100&h=100&fit=crop" class="w-12 h-12 rounded-full border-2 border-gray-900" alt="Team member">
+                            <img src="https://images.unsplash.com/photo-1500648767791-00dcc994a43e?w=100&h=100&fit=crop" class="w-12 h-12 rounded-full border-2 border-gray-900" alt="Team member">
+                            <div class="w-12 h-12 rounded-full border-2 border-gray-900 bg-indigo-600 flex items-center justify-center text-sm font-bold">+50</div>
+                        </div>
+                        <div class="flex flex-col justify-center">
+                            <span class="font-semibold">Expert Team Members</span>
+                            <span class="text-sm text-gray-400">Ready to help you</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="relative reveal">
+                    <div class="absolute -inset-4 bg-gradient-to-r from-indigo-500 to-purple-600 rounded-3xl opacity-30 blur-2xl"></div>
+                    <div class="relative glass-card rounded-3xl overflow-hidden">
+                        <img src="https://images.unsplash.com/photo-1522071820081-009f0129c71c?w=800&h=600&fit=crop" alt="Team collaboration" class="w-full h-auto image-mask">
+                        <div class="absolute bottom-0 left-0 right-0 p-6 bg-gradient-to-t from-black/80 to-transparent">
+                            <div class="flex items-center gap-4">
+                                <div class="w-12 h-12 rounded-full bg-white/10 flex items-center justify-center">
+                                    <i data-lucide="award" class="w-6 h-6 text-yellow-400"></i>
+                                </div>
+                                <div>
+                                    <div class="font-semibold">Top 100</div>
+                                    <div class="text-sm text-gray-400">Fastest Growing Tech Companies 2024</div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Work/Portfolio Section -->
+    <section id="work" class="py-32 relative">
+        <div class="max-w-7xl mx-auto px-6 lg:px-8">
+            <div class="flex flex-col md:flex-row justify-between items-end mb-16 reveal">
+                <div>
+                    <h2 class="text-4xl md:text-5xl font-bold mb-4">Featured <span class="text-gradient">Work</span></h2>
+                    <p class="text-xl text-gray-400 max-w-2xl">
+                        Explore our latest projects and see how we've helped businesses transform.
+                    </p>
+                </div>
+                <button class="mt-6 md:mt-0 magnetic-btn px-6 py-3 rounded-full glass text-white font-semibold hover:bg-white/10 transition-all flex items-center gap-2">
+                    View All Projects <i data-lucide="arrow-up-right" class="w-4 h-4"></i>
+                </button>
+            </div>
+
+            <div class="grid md:grid-cols-2 gap-8">
+                <!-- Project 1 -->
+                <div class="group relative overflow-hidden rounded-3xl reveal cursor-pointer">
+                    <div class="aspect-[4/3] overflow-hidden">
+                        <img src="https://images.unsplash.com/photo-1551288049-bebda4e38f71?w=800&h=600&fit=crop" alt="FinTech Dashboard" class="w-full h-full object-cover transform group-hover:scale-110 transition-transform duration-700">
+                    </div>
+                    <div class="absolute inset-0 bg-gradient-to-t from-black/90 via-black/50 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500 flex flex-col justify-end p-8">
+                        <span class="text-indigo-400 font-semibold mb-2">FinTech</span>
+                        <h3 class="text-2xl font-bold mb-2">Nexus Banking Platform</h3>
+                        <p class="text-gray-300 mb-4">Complete digital banking solution processing $2B+ monthly transactions.</p>
+                        <div class="flex gap-2">
+                            <span class="px-3 py-1 rounded-full bg-white/10 text-xs">React</span>
+                            <span class="px-3 py-1 rounded-full bg-white/10 text-xs">Node.js</span>
+                            <span class="px-3 py-1 rounded-full bg-white/10 text-xs">AWS</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Project 2 -->
+                <div class="group relative overflow-hidden rounded-3xl reveal cursor-pointer">
+                    <div class="aspect-[4/3] overflow-hidden">
+                        <img src="https://images.unsplash.com/photo-1576091160399-112ba8d25d1d?w=800&h=600&fit=crop" alt="Healthcare App" class="w-full h-full object-cover transform group-hover:scale-110 transition-transform duration-700">
+                    </div>
+                    <div class="absolute inset-0 bg-gradient-to-t from-black/90 via-black/50 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500 flex flex-col justify-end p-8">
+                        <span class="text-green-400 font-semibold mb-2">Healthcare</span>
+                        <h3 class="text-2xl font-bold mb-2">MediConnect Telehealth</h3>
+                        <p class="text-gray-300 mb-4">HIPAA-compliant telemedicine platform serving 500k+ patients.</p>
+                        <div class="flex gap-2">
+                            <span class="px-3 py-1 rounded-full bg-white/10 text-xs">Flutter</span>
+                            <span class="px-3 py-1 rounded-full bg-white/10 text-xs">Python</span>
+                            <span class="px-3 py-1 rounded-full bg-white/10 text-xs">AI/ML</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Project 3 -->
+                <div class="group relative overflow-hidden rounded-3xl reveal cursor-pointer">
+                    <div class="aspect-[4/3] overflow-hidden">
+                        <img src="https://images.unsplash.com/photo-1460925895917-afdab827c52f?w=800&h=600&fit=crop" alt="E-commerce Platform" class="w-full h-full object-cover transform group-hover:scale-110 transition-transform duration-700">
+                    </div>
+                    <div class="absolute inset-0 bg-gradient-to-t from-black/90 via-black/50 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500 flex flex-col justify-end p-8">
+                        <span class="text-purple-400 font-semibold mb-2">E-Commerce</span>
+                        <h3 class="text-2xl font-bold mb-2">Luxe Marketplace</h3>
+                        <p class="text-gray-300 mb-4">Luxury goods marketplace with AR try-on features.</p>
+                        <div class="flex gap-2">
+                            <span class="px-3 py-1 rounded-full bg-white/10 text-xs">Next.js</span>
+                            <span class="px-3 py-1 rounded-full bg-white/10 text-xs">Shopify</span>
+                            <span class="px-3 py-1 rounded-full bg-white/10 text-xs">AR/VR</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Project 4 -->
+                <div class="group relative overflow-hidden rounded-3xl reveal cursor-pointer">
+                    <div class="aspect-[4/3] overflow-hidden">
+                        <img src="https://images.unsplash.com/photo-1558494949-ef010cbdcc31?w=800&h=600&fit=crop" alt="IoT Platform" class="w-full h-full object-cover transform group-hover:scale-110 transition-transform duration-700">
+                    </div>
+                    <div class="absolute inset-0 bg-gradient-to-t from-black/90 via-black/50 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500 flex flex-col justify-end p-8">
+                        <span class="text-orange-400 font-semibold mb-2">IoT</span>
+                        <h3 class="text-2xl font-bold mb-2">SmartCity OS</h3>
+                        <p class="text-gray-300 mb-4">Urban infrastructure management system for 3 major cities.</p>
+                        <div class="flex gap-2">
+                            <span class="px-3 py-1 rounded-full bg-white/10 text-xs">IoT</span>
+                            <span class="px-3 py-1 rounded-full bg-white/10 text-xs">Edge Computing</span>
+                            <span class="px-3 py-1 rounded-full bg-white/10 text-xs">Blockchain</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Testimonials Section -->
+    <section class="py-32 relative overflow-hidden">
+        <div class="absolute inset-0 bg-gradient-to-b from-indigo-900/20 to-transparent"></div>
+        
+        <div class="max-w-7xl mx-auto px-6 lg:px-8 relative z-10">
+            <div class="text-center mb-16 reveal">
+                <h2 class="text-4xl md:text-5xl font-bold mb-6">Client <span class="text-gradient">Stories</span></h2>
+            </div>
+
+            <div class="grid md:grid-cols-3 gap-8">
+                <!-- Testimonial 1 -->
+                <div class="glass-card rounded-3xl p-8 reveal hover-lift">
+                    <div class="flex gap-1 mb-6">
+                        <i data-lucide="star" class="w-5 h-5 text-yellow-400 fill-yellow-400"></i>
+                        <i data-lucide="star" class="w-5 h-5 text-yellow-400 fill-yellow-400"></i>
+                        <i data-lucide="star" class="w-5 h-5 text-yellow-400 fill-yellow-400"></i>
+                        <i data-lucide="star" class="w-5 h-5 text-yellow-400 fill-yellow-400"></i>
+                        <i data-lucide="star" class="w-5 h-5 text-yellow-400 fill-yellow-400"></i>
+                    </div>
+                    <p class="text-gray-300 mb-6 leading-relaxed">
+                        "Nova Solutions transformed our legacy system into a modern, scalable platform. 
+                        Their technical expertise and attention to detail exceeded our expectations."
+                    </p>
+                    <div class="flex items-center gap-4">
+                        <img src="https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?w=100&h=100&fit=crop" class="w-12 h-12 rounded-full" alt="Client">
+                        <div>
+                            <div class="font-semibold">Michael Chen</div>
+                            <div class="text-sm text-gray-400">CTO, TechVentures Inc.</div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Testimonial 2 -->
+                <div class="glass-card rounded-3xl p-8 reveal hover-lift">
+                    <div class="flex gap-1 mb-6">
+                        <i data-lucide="star" class="w-5 h-5 text-yellow-400 fill-yellow-400"></i>
+                        <i data-lucide="star" class="w-5 h-5 text-yellow-400 fill-yellow-400"></i>
+                        <i data-lucide="star" class="w-5 h-5 text-yellow-400 fill-yellow-400"></i>
+                        <i data-lucide="star" class="w-5 h-5 text-yellow-400 fill-yellow-400"></i>
+                        <i data-lucide="star" class="w-5 h-5 text-yellow-400 fill-yellow-400"></i>
+                    </div>
+                    <p class="text-gray-300 mb-6 leading-relaxed">
+                        "The AI solution they built increased our operational efficiency by 300%. 
+                        A truly exceptional team that delivers on their promises."
+                    </p>
+                    <div class="flex items-center gap-4">
+                        <img src="https://images.unsplash.com/photo-1580489944761-15a19d654956?w=100&h=100&fit=crop" class="w-12 h-12 rounded-full" alt="Client">
+                        <div>
+                            <div class="font-semibold">Sarah Johnson</div>
+                            <div class="text-sm text-gray-400">CEO, DataDrive Analytics</div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Testimonial 3 -->
+                <div class="glass-card rounded-3xl p-8 reveal hover-lift">
+                    <div class="flex gap-1 mb-6">
+                        <i data-lucide="star" class="w-5 h-5 text-yellow-400 fill-yellow-400"></i>
+                        <i data-lucide="star" class="w-5 h-5 text-yellow-400 fill-yellow-400"></i>
+                        <i data-lucide="star" class="w-5 h-5 text-yellow-400 fill-yellow-400"></i>
+                        <i data-lucide="star" class="w-5 h-5 text-yellow-400 fill-yellow-400"></i>
+                        <i data-lucide="star" class="w-5 h-5 text-yellow-400 fill-yellow-400"></i>
+                    </div>
+                    <p class="text-gray-300 mb-6 leading-relaxed">
+                        "Working with Nova was a game-changer. They didn't just build software; 
+                        they became strategic partners in our digital transformation journey."
+                    </p>
+                    <div class="flex items-center gap-4">
+                        <img src="https://images.unsplash.com/photo-1519085360753-af0119f7cbe7?w=100&h=100&fit=crop" class="w-12 h-12 rounded-full" alt="Client">
+                        <div>
+                            <div class="font-semibold">David Park</div>
+                            <div class="text-sm text-gray-400">Director, Global Retail Co.</div>
+                        </div>
+                    </div                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Testimonials Section -->
+    <section class="py-32 relative overflow-hidden">
+        <div class="absolute inset-0 bg-gradient-to-b from-indigo-900/20 to-transparent"></div>
+        
+        <div class="max-w-7xl mx-auto px-6 lg:px-8 relative z-10">
+            <div class="text-center mb-16 reveal">
+                <h2 class="text-4xl md:text-5xl font-bold mb-6">Client <span class="text-gradient">Stories</span></h2>
+            </div>
+
+            <div class="grid md:grid-cols-3 gap-8">
+                <!-- Testimonial 1 -->
+                <div class="glass-card rounded-3xl p-8 reveal hover-lift">
+                    <div class="flex gap-1 mb-6">
+                        <i data-lucide="star" class="w-5 h-5 text-yellow-400 fill-yellow-400"></i>
+                        <i data-lucide="star" class="w-5 h-5 text-yellow-400 fill-yellow-400"></i>
+                        <i data-lucide="star" class="w-5 h-5 text-yellow-400 fill-yellow-400"></i>
+                        <i data-lucide="star" class="w-5 h-5 text-yellow-400 fill-yellow-400"></i>
+                        <i data-lucide="star" class="w-5 h-5 text-yellow-400 fill-yellow-400"></i>
+                    </div>
+                    <p class="text-gray-300 mb-6 leading-relaxed">
+                        "Nova Solutions transformed our legacy system into a modern, scalable platform. 
+                        Their technical expertise and attention to detail exceeded our expectations."
+                    </p>
+                    <div class="flex items-center gap-4">
+                        <img src="https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?w=100&h=100&fit=crop" class="w-12 h-12 rounded-full" alt="Client">
+                        <div>
+                            <div class="font-semibold">Michael Chen</div>
+                            <div class="text-sm text-gray-400">CTO, TechVentures Inc.</div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Testimonial 2 -->
+                <div class="glass-card rounded-3xl p-8 reveal hover-lift">
+                    <div class="flex gap-1 mb-6">
+                        <i data-lucide="star" class="w-5 h-5 text-yellow-400 fill-yellow-400"></i>
+                        <i data-lucide="star" class="w-5 h-5 text-yellow-400 fill-yellow-400"></i>
+                        <i data-lucide="star" class="w-5 h-5 text-yellow-400 fill-yellow-400"></i>
+                        <i data-lucide="star" class="w-5 h-5 text-yellow-400 fill-yellow-400"></i>
+                        <i data-lucide="star" class="w-5 h-5 text-yellow-400 fill-yellow-400"></i>
+                    </div>
+                    <p class="text-gray-300 mb-6 leading-relaxed">
+                        "The AI solution they built increased our operational efficiency by 300%. 
+                        A truly exceptional team that delivers on their promises."
+                    </p>
+                    <div class="flex items-center gap-4">
+                        <img src="https://images.unsplash.com/photo-1580489944761-15a19d654956?w=100&h=100&fit=crop" class="w-12 h-12 rounded-full" alt="Client">
+                        <div>
+                            <div class="font-semibold">Sarah Johnson</div>
+                            <div class="text-sm text-gray-400">CEO, DataDrive Analytics</div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Testimonial 3 -->
+                <div class="glass-card rounded-3xl p-8 reveal hover-lift">
+                    <div class="flex gap-1 mb-6">
+                        <i data-lucide="star" class="w-5 h-5 text-yellow-400 fill-yellow-400"></i>
+                        <i data-lucide="star" class="w-5 h-5 text-yellow-400 fill-yellow-400"></i>
+                        <i data-lucide="star" class="w-5 h-5 text-yellow-400 fill-yellow-400"></i>
+                        <i data-lucide="star" class="w-5 h-5 text-yellow-400 fill-yellow-400"></i>
+                        <i data-lucide="star" class="w-5 h-5 text-yellow-400 fill-yellow-400"></i>
+                    </div>
+                    <p class="text-gray-300 mb-6 leading-relaxed">
+                        "Working with Nova was a game-changer. They didn't just build software; 
+                        they became strategic partners in our digital transformation journey."
+                    </p>
+                    <div class="flex items-center gap-4">
+                        <img src="https://images.unsplash.com/photo-1519085360753-af0119f7cbe7?w=100&h=100&fit=crop" class="w-12 h-12 rounded-full" alt="Client">
+                        <div>
+                            <div class="font-semibold">David Park</div>
+                            <div class="text-sm text-gray-400">Director, Global Retail Co.</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Contact Section -->
+    <section id="contact" class="py-32 relative">
+        <div class="max-w-4xl mx-auto px-6 lg:px-8">
+            <div class="glass-card rounded-3xl p-8 md:p-12 reveal animated-border">
+                <div class="text-center mb-12">
+                    <h2 class="text-4xl md:text-5xl font-bold mb-6">Let's Build <span class="text-gradient">Together</span></h2>
+                    <p class="text-xl text-gray-400">
+                        Ready to start your next project? Get in touch and let's create something extraordinary.
+                    </p>
+                </div>
+
+                <form class="space-y-6" onsubmit="event.preventDefault(); alert('Thank you for your message! We will get back to you soon.');">
+                    <div class="grid md:grid-cols-2 gap-6">
+                        <div class="space-y-2">
+                            <label class="text-sm font-medium text-gray-300">Name</label>
+                            <input type="text" class="w-full px-4 py-3 rounded-xl bg-white/5 border border-white/10 focus:border-indigo-500 focus:outline-none transition-colors text-white placeholder-gray-500" placeholder="John Doe">
+                        </div>
+                        <div class="space-y-2">
+                            <label class="text-sm font-medium text-gray-300">Email</label>
+                            <input type="email" class="w-full px-4 py-3 rounded-xl bg-white/5 border border-white/10 focus:border-indigo-500 focus:outline-none transition-colors text-white placeholder-gray-500" placeholder="john@company.com">
+                        </div>
+                    </div>
+                    
+                    <div class="space-y-2">
+                        <label class="text-sm font-medium text-gray-300">Project Type</label>
+                        <select class="w-full px-4 py-3 rounded-xl bg-white/5 border border-white/10 focus:border-indigo-500 focus:outline-none transition-colors text-white">
+                            <option value="" class="bg-gray-900">Select a service</option>
+                            <option value="mobile" class="bg-gray-900">Mobile Development</option>
+                            <option value="web" class="bg-gray-900">Web Application</option>
+                            <option value="ai" class="bg-gray-900">AI & Machine Learning</option>
+                            <option value="cloud" class="bg-gray-900">Cloud Architecture</option>
+                            <option value="other" class="bg-gray-900">Other</option>
+                        </select>
+                    </div>
+
+                    <div class="space-y-2">
+                        <label class="text-sm font-medium text-gray-300">Message</label>
+                        <textarea rows="4" class="w-full px-4 py-3 rounded-xl bg-white/5 border border-white/10 focus:border-indigo-500 focus:outline-none transition-colors text-white placeholder-gray-500 resize-none" placeholder="Tell us about your project..."></textarea>
+                    </div>
+
+                    <button type="submit" class="w-full magnetic-btn py-4 rounded-xl bg-gradient-to-r from-indigo-600 to-purple-600 text-white font-bold text-lg hover:shadow-2xl hover:shadow-indigo-500/25 transition-all flex items-center justify-center gap-2 group">
+                        Send Message
+                        <i data-lucide="send" class="w-5 h-5 group-hover:translate-x-1 group-hover:-translate-y-1 transition-transform"></i>
+                    </button>
+                </form>
+
+                <div class="mt-12 pt-8 border-t border-white/10 grid md:grid-cols-3 gap-8 text-center">
+                    <div>
+                        <i data-lucide="mail" class="w-6 h-6 text-indigo-400 mx-auto mb-2"></i>
+                        <div class="text-sm text-gray-400">hello@novasolutions.tech</div>
+                    </div>
+                    <div>
+                        <i data-lucide="phone" class="w-6 h-6 text-indigo-400 mx-auto mb-2"></i>
+                        <div class="text-sm text-gray-400">+1 (555) 123-4567</div>
+                    </div>
+                    <div>
+                        <i data-lucide="map-pin" class="w-6 h-6 text-indigo-400 mx-auto mb-2"></i>
+                        <div class="text-sm text-gray-400">San Francisco, CA</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="py-12 border-t border-white/10">
+        <div class="max-w-7xl mx-auto px-6 lg:px-8">
+            <div class="grid md:grid-cols-4 gap-8 mb-12">
+                <div class="col-span-2">
+                    <div class="flex items-center gap-2 mb-4">
+                        <div class="w-8 h-8 rounded-lg bg-gradient-to-br from-indigo-500 to-purple-600 flex items-center justify-center">
+                            <i data-lucide="zap" class="w-5 h-5 text-white"></i>
+                        </div>
+                        <span class="text-xl font-bold">Nova<span class="text-gradient">Solutions</span></span>
+                    </div>
+                    <p class="text-gray-400 max-w-sm">
+                        Crafting digital excellence through innovative software solutions. 
+                        Your vision, our expertise.
+                    </p>
+                </div>
+                
+                <div>
+                    <h4 class="font-semibold mb-4">Services</h4>
+                    <ul class="space-y-2 text-gray-400">
+                        <li><a href="#" class="hover:text-white transition-colors">Mobile Development</a></li>
+                        <li><a href="#" class="hover:text-white transition-colors">Web Applications</a></li>
+                        <li><a href="#" class="hover:text-white transition-colors">AI Solutions</a></li>
+                        <li><a href="#" class="hover:text-white transition-colors">Cloud Services</a></li>
+                    </ul>
+                </div>
+
+                <div>
+                    <h4 class="font-semibold mb-4">Company</h4>
+                    <ul class="space-y-2 text-gray-400">
+                        <li><a href="#" class="hover:text-white transition-colors">About Us</a></li>
+                        <li><a href="#" class="hover:text-white transition-colors">Careers</a></li>
+                        <li><a href="#" class="hover:text-white transition-colors">Blog</a></li>
+                        <li><a href="#" class="hover:text-white transition-colors">Contact</a></li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="flex flex-col md:flex-row justify-between items-center pt-8 border-t border-white/10">
+                                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Testimonials Section -->
+    <section class="py-32 relative overflow-hidden">
+        <div class="absolute inset-0 bg-gradient-to-b from-indigo-900/20 to-transparent"></div>
+        
+        <div class="max-w-7xl mx-auto px-6 lg:px-8 relative z-10">
+            <div class="text-center mb-16 reveal">
+                <h2 class="text-4xl md:text-5xl font-bold mb-6">Client <span class="text-gradient">Stories</span></h2>
+            </div>
+
+            <div class="grid md:grid-cols-3 gap-8">
+                <!-- Testimonial 1 -->
+                <div class="glass-card rounded-3xl p-8 reveal hover-lift">
+                    <div class="flex gap-1 mb-6">
+                        <i data-lucide="star" class="w-5 h-5 text-yellow-400 fill-yellow-400"></i>
+                        <i data-lucide="star" class="w-5 h-5 text-yellow-400 fill-yellow-400"></i>
+                        <i data-lucide="star" class="w-5 h-5 text-yellow-400 fill-yellow-400"></i>
+                        <i data-lucide="star" class="w-5 h-5 text-yellow-400 fill-yellow-400"></i>
+                        <i data-lucide="star" class="w-5 h-5 text-yellow-400 fill-yellow-400"></i>
+                    </div>
+                    <p class="text-gray-300 mb-6 leading-relaxed">
+                        "Nova Solutions transformed our legacy system into a modern, scalable platform. 
+                        Their technical expertise and attention to detail exceeded our expectations."
+                    </p>
+                    <div class="flex items-center gap-4">
+                        <img src="https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?w=100&h=100&fit=crop" class="w-12 h-12 rounded-full" alt="Client">
+                        <div>
+                            <div class="font-semibold">Michael Chen</div>
+                            <div class="text-sm text-gray-400">CTO, TechVentures Inc.</div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Testimonial 2 -->
+                <div class="glass-card rounded-3xl p-8 reveal hover-lift">
+                    <div class="flex gap-1 mb-6">
+                        <i data-lucide="star" class="w-5 h-5 text-yellow-400 fill-yellow-400"></i>
+                        <i data-lucide="star" class="w-5 h-5 text-yellow-400 fill-yellow-400"></i>
+                        <i data-lucide="star" class="w-5 h-5 text-yellow-400 fill-yellow-400"></i>
+                        <i data-lucide="star" class="w-5 h-5 text-yellow-400 fill-yellow-400"></i>
+                        <i data-lucide="star" class="w-5 h-5 text-yellow-400 fill-yellow-400"></i>
+                    </div>
+                    <p class="text-gray-300 mb-6 leading-relaxed">
+                        "The AI solution they built increased our operational efficiency by 300%. 
+                        A truly exceptional team that delivers on their promises."
+                    </p>
+                    <div class="flex items-center gap-4">
+                        <img src="https://images.unsplash.com/photo-1580489944761-15a19d654956?w=100&h=100&fit=crop" class="w-12 h-12 rounded-full" alt="Client">
+                        <div>
+                            <div class="font-semibold">Sarah Johnson</div>
+                            <div class="text-sm text-gray-400">CEO, DataDrive Analytics</div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Testimonial 3 -->
+                <div class="glass-card rounded-3xl p-8 reveal hover-lift">
+                    <div class="flex gap-1 mb-6">
+                        <i data-lucide="star" class="w-5 h-5 text-yellow-400 fill-yellow-400"></i>
+                        <i data-lucide="star" class="w-5 h-5 text-yellow-400 fill-yellow-400"></i>
+                        <i data-lucide="star" class="w-5 h-5 text-yellow-400 fill-yellow-400"></i>
+                        <i data-lucide="star" class="w-5 h-5 text-yellow-400 fill-yellow-400"></i>
+                        <i data-lucide="star" class="w-5 h-5 text-yellow-400 fill-yellow-400"></i>
+                    </div>
+                    <p class="text-gray-300 mb-6 leading-relaxed">
+                        "Working with Nova was a game-changer. They didn't just build software; 
+                        they became strategic partners in our digital transformation journey."
+                    </p>
+                    <div class="flex items-center gap-4">
+                        <img src="https://images.unsplash.com/photo-1519085360753-af0119f7cbe7?w=100&h=100&fit=crop" class="w-12 h-12 rounded-full" alt="Client">
+                        <div>
+                            <div class="font-semibold">David Park</div>
+                            <div class="text-sm text-gray-400">Director, Global Retail Co.</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Contact Section -->
+    <section id="contact" class="py-32 relative">
+        <div class="max-w-4xl mx-auto px-6 lg:px-8">
+            <div class="glass-card rounded-3xl p-8 md:p-12 reveal animated-border">
+                <div class="text-center mb-12">
+                    <h2 class="text-4xl md:text-5xl font-bold mb-6">Let's Build <span class="text-gradient">Together</span></h2>
+                    <p class="text-xl text-gray-400">
+                        Ready to start your next project? Get in touch and let's create something extraordinary.
+                    </p>
+                </div>
+
+                <form class="space-y-6" onsubmit="event.preventDefault(); alert('Thank you for your message! We will get back to you soon.');">
+                    <div class="grid md:grid-cols-2 gap-6">
+                        <div class="space-y-2">
+                            <label class="text-sm font-medium text-gray-300">Name</label>
+                            <input type="text" class="w-full px-4 py-3 rounded-xl bg-white/5 border border-white/10 focus:border-indigo-500 focus:outline-none transition-colors text-white placeholder-gray-500" placeholder="John Doe">
+                        </div>
+                        <div class="space-y-2">
+                            <label class="text-sm font-medium text-gray-300">Email</label>
+                            <input type="email" class="w-full px-4 py-3 rounded-xl bg-white/5 border border-white/10 focus:border-indigo-500 focus:outline-none transition-colors text-white placeholder-gray-500" placeholder="john@company.com">
+                        </div>
+                    </div>
+                    
+                    <div class="space-y-2">
+                        <label class="text-sm font-medium text-gray-300">Project Type</label>
+                        <select class="w-full px-4 py-3 rounded-xl bg-white/5 border border-white/10 focus:border-indigo-500 focus:outline-none transition-colors text-white">
+                            <option value="" class="bg-gray-900">Select a service</option>
+                            <option value="mobile" class="bg-gray-900">Mobile Development</option>
+                            <option value="web" class="bg-gray-900">Web Application</option>
+                            <option value="ai" class="bg-gray-900">AI & Machine Learning</option>
+                            <option value="cloud" class="bg-gray-900">Cloud Architecture</option>
+                            <option value="other" class="bg-gray-900">Other</option>
+                        </select>
+                    </div>
+
+                    <div class="space-y-2">
+                        <label class="text-sm font-medium text-gray-300">Message</label>
+                        <textarea rows="4" class="w-full px-4 py-3 rounded-xl bg-white/5 border border-white/10 focus:border-indigo-500 focus:outline-none transition-colors text-white placeholder-gray-500 resize-none" placeholder="Tell us about your project..."></textarea>
+                    </div>
+
+                    <button type="submit" class="w-full magnetic-btn py-4 rounded-xl bg-gradient-to-r from-indigo-600 to-purple-600 text-white font-bold text-lg hover:shadow-2xl hover:shadow-indigo-500/25 transition-all flex items-center justify-center gap-2 group">
+                        Send Message
+                        <i data-lucide="send" class="w-5 h-5 group-hover:translate-x-1 group-hover:-translate-y-1 transition-transform"></i>
+                    </button>
+                </form>
+
+                <div class="mt-12 pt-8 border-t border-white/10 grid md:grid-cols-3 gap-8 text-center">
+                    <div>
+                        <i data-lucide="mail" class="w-6 h-6 text-indigo-400 mx-auto mb-2"></i>
+                        <div class="text-sm text-gray-400">hello@novasolutions.tech</div>
+                    </div>
+                    <div>
+                        <i data-lucide="phone" class="w-6 h-6 text-indigo-400 mx-auto mb-2"></i>
+                        <div class="text-sm text-gray-400">+1 (555) 123-4567</div>
+                    </div>
+                    <div>
+                        <i data-lucide="map-pin" class="w-6 h-6 text-indigo-400 mx-auto mb-2"></i>
+                        <div class="text-sm text-gray-400">San Francisco, CA</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="py-12 border-t border-white/10">
+        <div class="max-w-7xl mx-auto px-6 lg:px-8">
+            <div class="grid md:grid-cols-4 gap-8 mb-12">
+                <div class="col-span-2">
+                    <div class="flex items-center gap-2 mb-4">
+                        <div class="w-8 h-8 rounded-lg bg-gradient-to-br from-indigo-500 to-purple-600 flex items-center justify-center">
+                            <i data-lucide="zap" class="w-5 h-5 text-white"></i>
+                        </div>
+                        <span class="text-xl font-bold">Nova<span class="text-gradient">Solutions</span></span>
+                    </div>
+                    <p class="text-gray-400 max-w-sm">
+                        Crafting digital excellence through innovative software solutions. 
+                        Your vision, our expertise.
+                    </p>
+                </div>
+                
+                <div>
+                    <h4 class="font-semibold mb-4">Services</h4>
+                    <ul class="space-y-2 text-gray-400">
+                        <li><a href="#" class="hover:text-white transition-colors">Mobile Development</a></li>
+                        <li><a href="#" class="hover:text-white transition-colors">Web Applications</a></li>
+                        <li><a href="#" class="hover:text-white transition-colors">AI Solutions</a></li>
+                        <li><a href="#" class="hover:text-white transition-colors">Cloud Services</a></li>
+                    </ul>
+                </div>
+
+                <div>
+                    <h4 class="font-semibold mb-4">Company</h4>
+                    <ul class="space-y-2 text-gray-400">
+                        <li><a href="#" class="hover:text-white transition-colors">About Us</a></li>
+                        <li><a href="#" class="hover:text-white transition-colors">Careers</a></li>
+                        <li><a href="#" class="hover:text-white transition-colors">Blog</a></li>
+                        <li><a href="#" class="hover:text-white transition-colors">Contact</a></li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="flex flex-col md:flex-row justify-between items-center pt-8 border-t border-white/10">
+                <div class="text-gray-400 text-sm mb-4 md:mb-0">
+                    © 2024 Nova Solutions. All rights reserved.
+                </div>
+                <div class="flex gap-4">
+                    <a href="#" class="w-10 h-10 rounded-full glass flex items-center justify-center text-gray-400 hover:text-white hover:bg-white/10 transition-all">
+                        <i data-lucide="twitter" class="w-5 h-5"></i>
+                    </a>
+                    <a href="#" class="w-10 h-10 rounded-full glass flex items-center justify-center text-gray-400 hover:text-white hover:bg-white/10 transition-all">
+                        <i data-lucide="linkedin" class="w-5 h-5"></i>
+                    </a>
+                    <a href="#" class="w-10 h-10 rounded-full glass flex items-center justify-center text-gray-400 hover:text-white hover:bg-white/10 transition-all">
+                        <i data-lucide="github" class="w-5 h-5"></i>
+                    </a>
+                    <a href="#" class="w-10 h-10 rounded-full glass flex items-center justify-center text-gray-400 hover:text-white hover:bg-white/10 transition-all">
+                        <i data-lucide="instagram" class="w-5 h-5"></i>
+                    </a>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // Initialize Lucide Icons
+        lucide.createIcons();
+
+        // GSAP ScrollTrigger Registration
+        gsap.registerPlugin(ScrollTrigger);
+
+        // Navigation Scroll Effect
+        const navbar = document.getElementById('navbar');
+        window.addEventListener('scroll', () => {
+            if (window.scrollY > 50) {
+                navbar.classList.add('nav-blur');
+                navbar.classList.remove('py-4');
+                navbar.classList.add('py-2');
+            } else {
+                navbar.classList.remove('nav-blur');
+                navbar.classList.remove('py-2');
+                navbar.classList.add('py-4');
+            }
+        });
+
+        // Mobile Menu Toggle
+        const mobileMenuBtn = document.getElementById('mobile-menu-btn');
+        const mobileMenu = document.getElementById('mobile-menu');
+        mobileMenuBtn.addEventListener('click', () => {
+            mobileMenu.classList.toggle('hidden');
+        });
+
+        // Typewriter Effect
+        const words = ['Digital Reality', 'Future Tech', 'Smart Solutions', 'Innovation'];
+        let wordIndex = 0;
+        let charIndex = 0;
+        let isDeleting = false;
+        const typewriterElement = document.getElementById('typewriter');
+
+        function typeWriter() {
+            const currentWord = words[wordIndex];
+            
+            if (isDeleting) {
+                typewriterElement.textContent = currentWord.substring(0, charIndex - 1);
+                charIndex--;
+            } else {
+                typewriterElement.textContent = currentWord.substring(0, charIndex + 1);
+                charIndex++;
+            }
+
+            let typeSpeed = isDeleting ? 50 : 100;
+
+            if (!isDeleting && charIndex === currentWord.length) {
+                typeSpeed = 2000;
+                isDeleting = true;
+            } else if (isDeleting && charIndex === 0) {
+                isDeleting = false;
+                wordIndex = (wordIndex + 1) % words.length;
+                typeSpeed = 500;
+            }
+
+            setTimeout(typeWriter, typeSpeed);
+        }
+        typeWriter();
+
+        // Scroll Reveal Animations
+        const revealElements = document.querySelectorAll('.reveal');
+        revealElements.forEach((element, index) => {
+            gsap.to(element, {
+                scrollTrigger: {
+                    trigger: element,
+                    start: 'top 85%',
+                    toggleActions: 'play none none reverse'
+                },
+                opacity: 1,
+                y: 0,
+                duration: 0.8,
+                delay: index * 0.1,
+                ease: 'power3.out'
+            });
+        });
+
+        // Stats Counter Animation
+        const statNumbers = document.querySelectorAll('.stat-number');
+        statNumbers.forEach(stat => {
+            const target = parseInt(stat.getAttribute('data-target'));
+            gsap.to(stat, {
+                scrollTrigger: {
+                    trigger: stat,
+                    start: 'top 85%',
+                },
+                innerHTML: target,
+                duration: 2,
+                snap: { innerHTML: 1 },
+                ease: 'power2.out'
+            });
+        });
+
+        // Parallax Effect for Orbs
+        document.addEventListener('mousemove', (e) => {
+            const mouseX = e.clientX / window.innerWidth - 0.5;
+            const mouseY = e.clientY / window.innerHeight - 0.5;
+
+            gsap.to('.orb-1', {
+                x: mouseX * 50,
+                y: mouseY * 50,
+                duration: 1,
+                ease: 'power2.out'
+            });
+
+            gsap.to('.orb-2', {
+                x: -mouseX * 30,
+                y: -mouseY * 30,
+                duration: 1,
+                ease: 'power2.out'
+            });
+        });
+
+        // Magnetic Button Effect
+        const magneticBtns = document.querySelectorAll('.magnetic-btn');
+        magneticBtns.forEach(btn => {
+            btn.addEventListener('mousemove', (e) => {
+                const rect = btn.getBoundingClientRect();
+                const x = e.clientX - rect.left - rect.width / 2;
+                const y = e.clientY - rect.top - rect.height / 2;
+                
+                gsap.to(btn, {
+                    x: x * 0.3,
+                    y: y * 0.3,
+                    duration: 0.3,
+                    ease: 'power2.out'
+                });
+            });
+
+            btn.addEventListener('mouseleave', () => {
+                gsap.to(btn, {
+                    x: 0,
+                    y: 0,
+                    duration: 0.3,
+                    ease: 'power2.out'
+                });
+            });
+        });
+
+        // Particle System
+        const canvas = document.getElementById('particles');
+        const ctx = canvas.getContext('2d');
+        let particles = [];
+
+        function resizeCanvas() {
+            canvas.width = window.innerWidth;
+            canvas.height = window.innerHeight;
+        }
+        resizeCanvas();
+        window.addEventListener('resize', resizeCanvas);
+
+        class Particle {
+            constructor() {
+                this.x = Math.random() * canvas.width;
+                this.y = Math.random() * canvas.height;
+                this.size = Math.random() * 2;
+                this.speedX = Math.random() * 0.5 - 0.25;
+                this.speedY = Math.random() * 0.5 - 0.25;
+                this.opacity = Math.random() * 0.5 + 0.1;
+            }
+
+            update() {
+                this.x += this.speedX;
+                this.y += this.speedY;
+
+                if (this.x > canvas.width) this.x = 0;
+                if (this.x < 0) this.x = canvas.width;
+                if (this.y > canvas.height) this.y = 0;
+                if (this.y < 0) this.y = canvas.height;
+            }
+
+            draw() {
+                ctx.fillStyle = `rgba(147, 51, 234, ${this.opacity})`;
+                ctx.beginPath();
+                ctx.arc(this
